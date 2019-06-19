@@ -1,0 +1,6 @@
+framework module APBCommon {
+  umbrella header "APBCommon-umbrella.h"
+
+  export *
+  module * { export * }
+}

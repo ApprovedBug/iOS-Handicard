@@ -1,0 +1,16 @@
+PODS:
+  - APBCommon (0.1.0)
+
+DEPENDENCIES:
+  - APBCommon (= 0.1.0)
+
+SPEC REPOS:
+  https://github.com/approvedbug/ios-specs.git:
+    - APBCommon
+
+SPEC CHECKSUMS:
+  APBCommon: 8a158d5d86a17712d74ed69a144a8e384bdd432c
+
+PODFILE CHECKSUM: 687c51b88275d7e654507b0d0d532264ec3a68db
+
+COCOAPODS: 1.6.2

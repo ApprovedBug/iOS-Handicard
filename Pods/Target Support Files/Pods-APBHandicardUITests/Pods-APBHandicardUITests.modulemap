@@ -1,0 +1,6 @@
+framework module Pods_APBHandicardUITests {
+  umbrella header "Pods-APBHandicardUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

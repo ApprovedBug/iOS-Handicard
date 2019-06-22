@@ -11,13 +11,34 @@ import APBCommon
 
 class AddCourseViewController: APBBaseViewController {
 
+    private lazy var holeCollectionViewDelegate: AddCourseHoleCollectionViewDelegate = {
+        let delegate = AddCourseHoleCollectionViewDelegate()
+        return delegate
+    }()
+
+    private lazy var pickerDelegate: AddCourseStrokeIndexPickerDelegate = {
+        let delegate = AddCourseStrokeIndexPickerDelegate()
+        return delegate
+    }()
+
     override var rootView: AddCourseView? {
         get {
-            if (_rootView == nil) {
-                _rootView = AddCourseView()
+            if _rootView == nil {
+                let rootView = AddCourseView()
+                rootView.holeCollectionView.register(AddCourseHoleCollectionViewCell.classForCoder(),
+                                        forCellWithReuseIdentifier: holeCollectionViewDelegate.reuseIdentifier)
+                rootView.holeCollectionView.dataSource = holeCollectionViewDelegate
+                rootView.holeCollectionView.delegate = holeCollectionViewDelegate
+                _rootView = rootView
             }
             return _rootView as? AddCourseView
         }
     }
 
+    override func loadData() {
+
+        let holes = AddCourseRepository.loadBlankHoles()
+        holeCollectionViewDelegate.holes = holes
+        rootView?.holeCollectionView.reloadData()
+    }
 }

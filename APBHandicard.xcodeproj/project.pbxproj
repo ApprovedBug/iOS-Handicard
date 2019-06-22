@@ -28,6 +28,11 @@
 		71AEEC0022B7D098000908E1 /* ScorecardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AEEBFF22B7D098000908E1 /* ScorecardHeaderView.swift */; };
 		71AEEC0322B91647000908E1 /* SelectCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AEEC0222B91647000908E1 /* SelectCourseViewController.swift */; };
 		71AEEC0622B91674000908E1 /* SelectCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AEEC0522B91674000908E1 /* SelectCourseView.swift */; };
+		71DD8AC522BBAF8E00281C80 /* AddCourseStrokeIndexPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DD8AC422BBAF8E00281C80 /* AddCourseStrokeIndexPickerDelegate.swift */; };
+		71DD8AC722BBC2E400281C80 /* AddCourseHoleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DD8AC622BBC2E400281C80 /* AddCourseHoleCollectionViewCell.swift */; };
+		71DD8AC922BBC49900281C80 /* AddCourseHoleCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DD8AC822BBC49900281C80 /* AddCourseHoleCollectionViewDelegate.swift */; };
+		71DD8ACB22BD090B00281C80 /* AddCourseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DD8ACA22BD090B00281C80 /* AddCourseRepository.swift */; };
+		71DD8AD022BD173000281C80 /* HoleDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DD8ACF22BD173000281C80 /* HoleDTO.swift */; };
 		A4938334BBCFDAEBBB60E5F3 /* Pods_APBHandicard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57557A285E7308CF588B5989 /* Pods_APBHandicard.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +88,11 @@
 		71AEEBFF22B7D098000908E1 /* ScorecardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorecardHeaderView.swift; sourceTree = "<group>"; };
 		71AEEC0222B91647000908E1 /* SelectCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCourseViewController.swift; sourceTree = "<group>"; };
 		71AEEC0522B91674000908E1 /* SelectCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCourseView.swift; sourceTree = "<group>"; };
+		71DD8AC422BBAF8E00281C80 /* AddCourseStrokeIndexPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseStrokeIndexPickerDelegate.swift; sourceTree = "<group>"; };
+		71DD8AC622BBC2E400281C80 /* AddCourseHoleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseHoleCollectionViewCell.swift; sourceTree = "<group>"; };
+		71DD8AC822BBC49900281C80 /* AddCourseHoleCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseHoleCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		71DD8ACA22BD090B00281C80 /* AddCourseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseRepository.swift; sourceTree = "<group>"; };
+		71DD8ACF22BD173000281C80 /* HoleDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +160,9 @@
 			children = (
 				71472B7722BAE2E800A5E689 /* AddCourseView.swift */,
 				71472B7922BAE68A00A5E689 /* AddCourseHoleBuilderView.swift */,
+				71DD8AC422BBAF8E00281C80 /* AddCourseStrokeIndexPickerDelegate.swift */,
+				71DD8AC622BBC2E400281C80 /* AddCourseHoleCollectionViewCell.swift */,
+				71DD8AC822BBC49900281C80 /* AddCourseHoleCollectionViewDelegate.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -206,6 +219,8 @@
 		71A9068422B3D2F200C64920 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				71DD8ACE22BD171500281C80 /* Models */,
+				71DD8ACC22BD0E0C00281C80 /* Repositories */,
 				716A1D0722B3C89E00AB378C /* AppDelegate.swift */,
 				71A9068522B3D2FC00C64920 /* UI */,
 			);
@@ -295,6 +310,22 @@
 				71AEEC0522B91674000908E1 /* SelectCourseView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		71DD8ACC22BD0E0C00281C80 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				71DD8ACA22BD090B00281C80 /* AddCourseRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		71DD8ACE22BD171500281C80 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				71DD8ACF22BD173000281C80 /* HoleDTO.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -524,17 +555,22 @@
 			files = (
 				71A9068D22B3DC9600C64920 /* AddRoundViewController.swift in Sources */,
 				716A1D1022B3C89E00AB378C /* APBHandicard.xcdatamodeld in Sources */,
+				71DD8AC922BBC49900281C80 /* AddCourseHoleCollectionViewDelegate.swift in Sources */,
+				71DD8AD022BD173000281C80 /* HoleDTO.swift in Sources */,
 				71AEEBFC22B7C6EA000908E1 /* ScorecardCollectionViewDelegate.swift in Sources */,
 				71A9069322B3E0F800C64920 /* ScorecardView.swift in Sources */,
 				71A9069922B3E8D100C64920 /* ScorecardCollectionViewCell.swift in Sources */,
 				71472B7822BAE2E800A5E689 /* AddCourseView.swift in Sources */,
+				71DD8AC522BBAF8E00281C80 /* AddCourseStrokeIndexPickerDelegate.swift in Sources */,
 				71AEEC0622B91674000908E1 /* SelectCourseView.swift in Sources */,
 				716A1D0822B3C89E00AB378C /* AppDelegate.swift in Sources */,
 				71AEEC0322B91647000908E1 /* SelectCourseViewController.swift in Sources */,
 				71A9069022B3DE9400C64920 /* AddRoundView.swift in Sources */,
 				71472B7522BAE26300A5E689 /* AddCourseViewController.swift in Sources */,
+				71DD8AC722BBC2E400281C80 /* AddCourseHoleCollectionViewCell.swift in Sources */,
 				71472B7A22BAE68A00A5E689 /* AddCourseHoleBuilderView.swift in Sources */,
 				71A9068922B3D32700C64920 /* HomeView.swift in Sources */,
+				71DD8ACB22BD090B00281C80 /* AddCourseRepository.swift in Sources */,
 				71AEEC0022B7D098000908E1 /* ScorecardHeaderView.swift in Sources */,
 				71A9068322B3D2AA00C64920 /* HomeViewController.swift in Sources */,
 			);

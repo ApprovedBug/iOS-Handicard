@@ -21,12 +21,19 @@ class AddCourseView: APBBaseView {
 
     private lazy var courseNameField: UITextField = {
         let field = UITextField()
+        field.layer.borderWidth = 1
+        field.layer.borderColor = UIColor.lightGray.cgColor 
+        field.layer.cornerRadius = 5
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 0))
+        field.leftView = paddingView
+        field.leftViewMode = .always
         return field
     }()
 
-    private lazy var holeBuilder: AddCourseHoleBuilderView = {
-        let view = AddCourseHoleBuilderView()
-        return view
+    lazy var holeCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.backgroundColor = .clear
+        return collectionView
     }()
 
     // MARK: - View setup
@@ -34,7 +41,7 @@ class AddCourseView: APBBaseView {
     override func setupSubviews() {
         addSubview(courseNameHeader)
         addSubview(courseNameField)
-        addSubview(holeBuilder)
+        addSubview(holeCollectionView)
     }
 
     override func setupAutolayout() {
@@ -46,11 +53,12 @@ class AddCourseView: APBBaseView {
         // course name field
         courseNameField.alignAttribute(.top, WithView: courseNameHeader, Attribute: .bottom, constant: 12)
         courseNameField.alignLeadingAndTrailingEdgesWithView(self, leadingConstant: 12, trailingConstant: -12)
+        courseNameField.constrainHeight(32)
 
-        // hole builder
-        holeBuilder.alignBottomEdgeWithView(self, constant: 0)
-        holeBuilder.alignLeadingAndTrailingEdgesWithView(self, leadingConstant: 0, trailingConstant: 0)
-        holeBuilder.constrainHeight(320)
+        // hole collection view
+        holeCollectionView.alignAttribute(.top, WithView: courseNameField, Attribute: .bottom, constant: 12)
+        holeCollectionView.alignLeadingEdgeWithView(self, constant: 0)
+        holeCollectionView.constrainWidthWithView(self, constant: 0)
+        holeCollectionView.alignBottomEdgeWithView(self, constant: 0)
     }
-
 }

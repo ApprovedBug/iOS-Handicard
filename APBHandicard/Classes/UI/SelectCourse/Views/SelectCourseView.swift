@@ -27,7 +27,7 @@ class SelectCourseView: APBBaseView {
     }()
 
     private lazy var resultsCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.backgroundColor = .clear
         return collectionView
     }()
@@ -60,7 +60,7 @@ class SelectCourseView: APBBaseView {
         resultsCollectionView.alignBottomEdgeWithView(self, constant: 0)
 
         // add course button
-        addCourseButton.alignBottomEdgeWithView(self, constant: -12)
+        addCourseButton.alignBottomEdgeWithView(self, constant: -24)
         addCourseButton.alignLeadingAndTrailingEdgesWithView(self, leadingConstant: 12, trailingConstant: -12)
         addCourseButton.constrainHeight(32)
     }

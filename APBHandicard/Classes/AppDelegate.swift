@@ -28,6 +28,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
 
+//        let context = persistentContainer.viewContext
+//
+//        let course = Course(context: context)
+//
+//        course.name = "Warley Park Golf Club"
+//
+//        let hole = Hole(context: context)
+//
+//        hole.number = 1
+//        hole.par = 4
+//        hole.strokeIndex = 11
+//        hole.yards = 346
+//
+//        course.addToHoles(hole)
+
         return true
     }
 

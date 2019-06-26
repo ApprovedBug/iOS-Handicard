@@ -9,7 +9,7 @@
 import UIKit
 import APBCommon
 
-protocol HomeViewDelegate {
+protocol HomeViewDelegate: NSObject {
     func addRoundTapped()
 }
 
@@ -17,7 +17,7 @@ class HomeView: APBBaseView {
 
     // MARK: - Properties
 
-    var delegate: HomeViewDelegate?
+    weak var delegate: HomeViewDelegate?
 
     // MARK: - Subviews
 

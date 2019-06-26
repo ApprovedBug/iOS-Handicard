@@ -17,7 +17,7 @@ class AddCourseHoleBuilderView: APBBaseView, UITextFieldDelegate {
 
     // MARK: - Properties
 
-    var delegate: AddCourseHoleBuilderViewDelegate?
+    weak var delegate: AddCourseHoleBuilderViewDelegate?
 
     // MARK: - Subviews
 
@@ -107,20 +107,22 @@ class AddCourseHoleBuilderView: APBBaseView, UITextFieldDelegate {
 
         // stroke index header
         strokeIndexHeader.alignAttribute(.top, WithView: parSelector, Attribute: .bottom, constant: 12)
-        strokeIndexHeader.alignLeadingAndTrailingEdgesWithView(self, leadingConstant: 12, trailingConstant: -12)
+        strokeIndexHeader.alignLeadingEdgeWithView(self, constant: 12)
 
         // stroke index field
         strokeIndexField.alignAttribute(.top, WithView: strokeIndexHeader, Attribute: .bottom, constant: 12)
-        strokeIndexField.alignLeadingAndTrailingEdgesWithView(self, leadingConstant: 12, trailingConstant: -12)
+        strokeIndexField.alignLeadingEdgeWithView(self, constant: 12)
         strokeIndexField.constrainHeight(32)
 
         // yards header
-        yardsHeader.alignAttribute(.top, WithView: strokeIndexField, Attribute: .bottom, constant: 12)
-        yardsHeader.alignLeadingAndTrailingEdgesWithView(self, leadingConstant: 12, trailingConstant: -12)
+        yardsHeader.alignAttribute(.top, WithView: strokeIndexHeader, Attribute: .top, constant: 0)
+        yardsHeader.alignLeadingEdgeWithView(yardsField, constant: 0)
 
         // yards field
-        yardsField.alignAttribute(.top, WithView: yardsHeader, Attribute: .bottom, constant: 12)
-        yardsField.alignLeadingAndTrailingEdgesWithView(self, leadingConstant: 12, trailingConstant: -12)
+        yardsField.alignAttribute(.top, WithView: strokeIndexField, Attribute: .top, constant: 0)
+        yardsField.alignAttribute(.leading, WithView: strokeIndexField, Attribute: .trailing, constant: 12)
+        yardsField.alignTrailingEdgeWithView(self, constant: -12)
+        yardsField.constrainWidthWithView(strokeIndexField, constant: 0)
         yardsField.constrainHeight(32)
     }
 

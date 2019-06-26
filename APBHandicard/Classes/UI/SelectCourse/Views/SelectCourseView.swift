@@ -17,12 +17,19 @@ class SelectCourseView: APBBaseView {
 
     // MARK: - Properties
 
-    var delegate: SelectCourseViewDelegate?
+    weak var delegate: SelectCourseViewDelegate?
 
     // MARK: - Subviews
 
     private lazy var searchField: UITextField = {
         let field = UITextField()
+        field.layer.borderWidth = 1
+        field.layer.borderColor = UIColor.lightGray.cgColor
+        field.layer.cornerRadius = 5
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 0))
+        field.leftView = paddingView
+        field.leftViewMode = .always
+        field.placeholder = "Search courses"
         return field
     }()
 
@@ -35,7 +42,7 @@ class SelectCourseView: APBBaseView {
     private lazy var addCourseButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .blue
-        button.setTitle("Add Course", for: .normal)
+        button.setTitle("Add new course", for: .normal)
         button.addTarget(self, action: #selector(addCourseTapped), for: .touchUpInside)
         return button
     }()
@@ -53,6 +60,7 @@ class SelectCourseView: APBBaseView {
         // search field
         searchField.alignTopAndLeadingEdgesWithView(self, topConstant: 128, leadingConstant: 12)
         searchField.alignTrailingEdgeWithView(self, constant: -12)
+        searchField.constrainHeight(32)
 
         // results collection view
         resultsCollectionView.alignAttribute(.top, WithView: searchField, Attribute: .bottom, constant: 12)
@@ -60,7 +68,7 @@ class SelectCourseView: APBBaseView {
         resultsCollectionView.alignBottomEdgeWithView(self, constant: 0)
 
         // add course button
-        addCourseButton.alignBottomEdgeWithView(self, constant: -24)
+        addCourseButton.alignBottomEdgeWithView(self, constant: -36)
         addCourseButton.alignLeadingAndTrailingEdgesWithView(self, leadingConstant: 12, trailingConstant: -12)
         addCourseButton.constrainHeight(32)
     }

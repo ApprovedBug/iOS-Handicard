@@ -13,11 +13,7 @@ class AddCourseViewController: APBBaseViewController {
 
     private lazy var holeCollectionViewDelegate: AddCourseHoleCollectionViewDelegate = {
         let delegate = AddCourseHoleCollectionViewDelegate()
-        return delegate
-    }()
-
-    private lazy var pickerDelegate: AddCourseStrokeIndexPickerDelegate = {
-        let delegate = AddCourseStrokeIndexPickerDelegate()
+        delegate.delegate = self
         return delegate
     }()
 
@@ -26,7 +22,8 @@ class AddCourseViewController: APBBaseViewController {
             if _rootView == nil {
                 let rootView = AddCourseView()
                 rootView.holeCollectionView.register(AddCourseHoleCollectionViewCell.classForCoder(),
-                                        forCellWithReuseIdentifier: holeCollectionViewDelegate.reuseIdentifier)
+                                        forCellWithReuseIdentifier: holeCollectionViewDelegate.cellReuseIdentifier)
+                rootView.holeCollectionView.register(AddCourseFooterView.classForCoder(), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: holeCollectionViewDelegate.footerReuseIdentifier)
                 rootView.holeCollectionView.dataSource = holeCollectionViewDelegate
                 rootView.holeCollectionView.delegate = holeCollectionViewDelegate
                 _rootView = rootView
@@ -40,5 +37,19 @@ class AddCourseViewController: APBBaseViewController {
         let holes = AddCourseRepository.loadBlankHoles()
         holeCollectionViewDelegate.holes = holes
         rootView?.holeCollectionView.reloadData()
+    }
+}
+
+extension AddCourseViewController: AddCourseFooterViewDelegate {
+    func saveTapped() {
+
+        let courseName = rootView?.courseNameField.text
+        let selectedTee = rootView?.teeSelector.titleForSegment(at: rootView!.teeSelector.selectedSegmentIndex)
+
+        validateCourse(courseName: courseName, selectedTee: selectedTee, holes: holeCollectionViewDelegate.holes)
+    }
+
+    private func validateCourse(courseName: String?, selectedTee: String?, holes: [HoleDTO]?) {
+
     }
 }

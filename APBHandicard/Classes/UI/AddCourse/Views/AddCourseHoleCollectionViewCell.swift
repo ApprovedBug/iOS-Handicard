@@ -13,7 +13,7 @@ protocol AddCourseHoleCollectionViewCellDelegate: NSObject {
     func holeParSelected(hole: HoleDTO, par: Int)
 }
 
-class AddCourseHoleCollectionViewCell: APBBaseCollectionViewCell, AddCourseHoleBuilderViewDelegate {
+class AddCourseHoleCollectionViewCell: APBBaseCollectionViewCell {
 
     // MARK: - Properties
 
@@ -62,6 +62,14 @@ class AddCourseHoleCollectionViewCell: APBBaseCollectionViewCell, AddCourseHoleB
         if let hole = hole {
             titleLabel.text = "Hole \(hole.number!)"
 
+            if let strokeIndex = hole.strokeIndex {
+                builderView.strokeIndexField.text = String(strokeIndex)
+            }
+
+            if let yards = hole.yards {
+                builderView.yardsField.text = String(yards)
+            }
+
             if let par = hole.par {
                 for index in 0...builderView.parSelector.numberOfSegments {
                     let segmentTitle = builderView.parSelector.titleForSegment(at: index)
@@ -72,7 +80,7 @@ class AddCourseHoleCollectionViewCell: APBBaseCollectionViewCell, AddCourseHoleB
                         break
                     }
                 }
-             }
+            }
         }
     }
 
@@ -80,12 +88,22 @@ class AddCourseHoleCollectionViewCell: APBBaseCollectionViewCell, AddCourseHoleB
 
     override func prepareForReuse() {
         builderView.parSelector.selectedSegmentIndex = UISegmentedControl.noSegment
+        builderView.strokeIndexField.text = nil
+        builderView.yardsField.text = nil
     }
+}
 
-    // MARK: - AddCourseHoleBuilderViewDelegate
+extension AddCourseHoleCollectionViewCell : AddCourseHoleBuilderViewDelegate {
 
     func parSelected(par: Int) {
-
         hole?.par = par
+    }
+
+    func strokeIndexUpdated(strokeIndex: Int?) {
+        hole?.strokeIndex = strokeIndex
+    }
+
+    func yardageUpdated(yardage: Int?) {
+        hole?.yards = yardage
     }
 }

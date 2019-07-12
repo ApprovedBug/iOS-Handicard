@@ -11,6 +11,8 @@ import APBCommon
 
 protocol AddCourseHoleBuilderViewDelegate: NSObject {
     func parSelected(par: Int)
+    func yardageUpdated(yardage: Int?)
+    func strokeIndexUpdated(strokeIndex: Int?)
 }
 
 class AddCourseHoleBuilderView: APBBaseView, UITextFieldDelegate {
@@ -45,7 +47,7 @@ class AddCourseHoleBuilderView: APBBaseView, UITextFieldDelegate {
         return label
     }()
 
-    private lazy var strokeIndexField: UITextField = {
+    lazy var strokeIndexField: UITextField = {
         let field = UITextField()
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
@@ -64,7 +66,7 @@ class AddCourseHoleBuilderView: APBBaseView, UITextFieldDelegate {
         return label
     }()
 
-    private lazy var yardsField: UITextField = {
+    lazy var yardsField: UITextField = {
         let field = UITextField()
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
@@ -135,10 +137,23 @@ class AddCourseHoleBuilderView: APBBaseView, UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
-        let maxLength: Int = textField == strokeIndexField ? 2 : 3
         let currentString: NSString = textField.text! as NSString
-        let newString: NSString =
-            currentString.replacingCharacters(in: range, with: string) as NSString
-        return newString.length <= maxLength
+        let newString = currentString.replacingCharacters(in: range, with: string) as String
+
+        let maxLength: Int = textField == strokeIndexField ? 2 : 3
+
+        if newString.count <= maxLength {
+            if textField == strokeIndexField {
+                let strokeIndex = Int(newString)
+                delegate?.strokeIndexUpdated(strokeIndex: strokeIndex)
+            } else {
+                let yardage = Int(newString)
+                delegate?.yardageUpdated(yardage: yardage)
+            }
+
+            return true
+        } else {
+            return false
+        }
     }
 }

@@ -38,18 +38,57 @@ class AddCourseViewController: APBBaseViewController {
         holeCollectionViewDelegate.holes = holes
         rootView?.holeCollectionView.reloadData()
     }
+
+    fileprivate func validateCourse() -> Bool {
+
+        guard let courseName = rootView?.courseNameField.text,
+            let selectedParIndex = rootView?.teeSelector.selectedSegmentIndex,
+            let holes = holeCollectionViewDelegate.holes else {
+            return false
+        }
+
+        var isHolesValid = true
+
+        for hole in holes {
+
+            guard let holeNumber = hole.number,
+                let holeStrokeIndex = hole.strokeIndex,
+                let holePar = hole.par,
+                let holeYards = hole.yards else {
+                    isHolesValid = false
+                    break
+            }
+
+            if holeStrokeIndex > 0 && holePar > 0 && holeYards > 0 && holeNumber > 0 {
+                continue
+            } else {
+                isHolesValid = false
+                break
+            }
+        }
+
+        return selectedParIndex >= 0 && !courseName.isEmpty && isHolesValid
+    }
+
+    fileprivate func showValidationError() {
+        let alert = UIAlertController(title: "Incomplete course",
+                                      message: "Please make sure all details are filled in",
+                                      preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension AddCourseViewController: AddCourseFooterViewDelegate {
+    
     func saveTapped() {
 
-        let courseName = rootView?.courseNameField.text
-        let selectedTee = rootView?.teeSelector.titleForSegment(at: rootView!.teeSelector.selectedSegmentIndex)
+        if validateCourse() {
 
-        validateCourse(courseName: courseName, selectedTee: selectedTee, holes: holeCollectionViewDelegate.holes)
-    }
-
-    private func validateCourse(courseName: String?, selectedTee: String?, holes: [HoleDTO]?) {
-
+        } else {
+            showValidationError()
+        }
     }
 }

@@ -29,6 +29,6 @@ class HomeViewController: APBBaseViewController {
 extension HomeViewController: HomeViewDelegate {
 
     func addRoundTapped() {
-        navigationController?.pushViewController(SelectCourseViewController(), animated: true)
+        navigationController?.pushViewController(SelectCourseViewController(managedObjectContext: managedObjectContext), animated: true)
     }
 }

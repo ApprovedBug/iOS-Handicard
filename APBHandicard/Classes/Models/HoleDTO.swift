@@ -9,8 +9,8 @@
 import UIKit
 
 class HoleDTO: NSObject {
-    var number: Int?
-    var par: Int?
-    var strokeIndex: Int?
-    var yards: Int?
+    var number: Int16?
+    var par: Int16?
+    var strokeIndex: Int16?
+    var yards: Int16?
 }

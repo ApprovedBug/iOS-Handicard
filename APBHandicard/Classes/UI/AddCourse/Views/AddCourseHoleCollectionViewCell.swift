@@ -73,7 +73,7 @@ class AddCourseHoleCollectionViewCell: APBBaseCollectionViewCell {
             if let par = hole.par {
                 for index in 0...builderView.parSelector.numberOfSegments {
                     let segmentTitle = builderView.parSelector.titleForSegment(at: index)
-                    let segmentPar = Int(segmentTitle!)
+                    let segmentPar = Int16(segmentTitle!)
 
                     if segmentPar == par {
                         builderView.parSelector.selectedSegmentIndex = index
@@ -95,15 +95,15 @@ class AddCourseHoleCollectionViewCell: APBBaseCollectionViewCell {
 
 extension AddCourseHoleCollectionViewCell : AddCourseHoleBuilderViewDelegate {
 
-    func parSelected(par: Int) {
+    func parSelected(par: Int16) {
         hole?.par = par
     }
 
-    func strokeIndexUpdated(strokeIndex: Int?) {
+    func strokeIndexUpdated(strokeIndex: Int16?) {
         hole?.strokeIndex = strokeIndex
     }
 
-    func yardageUpdated(yardage: Int?) {
+    func yardageUpdated(yardage: Int16?) {
         hole?.yards = yardage
     }
 }

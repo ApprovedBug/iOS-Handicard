@@ -9,6 +9,12 @@
 import UIKit
 import APBCommon
 
+enum TeeType {
+    case championship
+    case mens
+    case ladies
+}
+
 class AddCourseViewController: APBBaseViewController {
 
     private lazy var holeCollectionViewDelegate: AddCourseHoleCollectionViewDelegate = {
@@ -34,18 +40,51 @@ class AddCourseViewController: APBBaseViewController {
 
     override func loadData() {
 
-        let holes = AddCourseRepository.loadBlankHoles()
+        let holes = loadBlankHoles()
         holeCollectionViewDelegate.holes = holes
         rootView?.holeCollectionView.reloadData()
     }
 
-    fileprivate func validateCourse() -> Bool {
+    fileprivate func loadBlankHoles() -> [HoleDTO] {
+
+        var holes = [HoleDTO]()
+
+        for index in 1...18 {
+            let hole = HoleDTO()
+            hole.number = Int16(index)
+            holes.append(hole)
+        }
+
+        return holes
+    }
+
+    // MARK: - Private functions
+
+    fileprivate func saveCourse() {
 
         guard let courseName = rootView?.courseNameField.text,
-            let selectedParIndex = rootView?.teeSelector.selectedSegmentIndex,
+            let selectedTeeIndex = rootView?.teeSelector.selectedSegmentIndex,
             let holes = holeCollectionViewDelegate.holes else {
-            return false
+                showValidationError()
+                return
         }
+
+        guard selectedTeeIndex >= 0,
+            let selectedTee = rootView?.teeSelector.titleForSegment(at: selectedTeeIndex) else {
+                return
+        }
+
+        if validateCourse(courseName: courseName, selectedTee: selectedTee, holes: holes) {
+
+            let fullCourseName = "\(courseName) - \(selectedTee)"
+
+            CourseRepository.saveCourse(context: managedObjectContext!, courseName: fullCourseName, holes: holes)
+        } else {
+            showValidationError()
+        }
+    }
+
+    fileprivate func validateCourse(courseName: String, selectedTee: String, holes: [HoleDTO]) -> Bool {
 
         var isHolesValid = true
 
@@ -67,7 +106,7 @@ class AddCourseViewController: APBBaseViewController {
             }
         }
 
-        return selectedParIndex >= 0 && !courseName.isEmpty && isHolesValid
+        return !selectedTee.isEmpty && !courseName.isEmpty && isHolesValid
     }
 
     fileprivate func showValidationError() {
@@ -82,13 +121,10 @@ class AddCourseViewController: APBBaseViewController {
 }
 
 extension AddCourseViewController: AddCourseFooterViewDelegate {
-    
+
     func saveTapped() {
+        saveCourse()
 
-        if validateCourse() {
-
-        } else {
-            showValidationError()
-        }
+        navigationController?.popViewController(animated: true)
     }
 }

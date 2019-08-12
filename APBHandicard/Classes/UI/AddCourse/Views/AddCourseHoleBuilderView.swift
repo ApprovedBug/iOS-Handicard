@@ -10,9 +10,9 @@ import UIKit
 import APBCommon
 
 protocol AddCourseHoleBuilderViewDelegate: NSObject {
-    func parSelected(par: Int)
-    func yardageUpdated(yardage: Int?)
-    func strokeIndexUpdated(strokeIndex: Int?)
+    func parSelected(par: Int16)
+    func yardageUpdated(yardage: Int16?)
+    func strokeIndexUpdated(strokeIndex: Int16?)
 }
 
 class AddCourseHoleBuilderView: APBBaseView, UITextFieldDelegate {
@@ -131,7 +131,7 @@ class AddCourseHoleBuilderView: APBBaseView, UITextFieldDelegate {
     @objc func parSelected(sender: UISegmentedControl) {
         if let selectedTitle = sender.titleForSegment(at: sender.selectedSegmentIndex) {
             let par = Int(selectedTitle)!
-            delegate?.parSelected(par: par)
+            delegate?.parSelected(par: Int16(par))
         }
     }
 
@@ -145,10 +145,10 @@ class AddCourseHoleBuilderView: APBBaseView, UITextFieldDelegate {
         if newString.count <= maxLength {
             if textField == strokeIndexField {
                 let strokeIndex = Int(newString)
-                delegate?.strokeIndexUpdated(strokeIndex: strokeIndex)
+                delegate?.strokeIndexUpdated(strokeIndex: Int16(strokeIndex!))
             } else {
                 let yardage = Int(newString)
-                delegate?.yardageUpdated(yardage: yardage)
+                delegate?.yardageUpdated(yardage: Int16(yardage!))
             }
 
             return true

@@ -11,6 +11,7 @@ import APBCommon
 
 protocol SelectCourseViewDelegate: NSObject {
     func addCourseTapped()
+    func searchTextChanged(text: String?)
 }
 
 class SelectCourseView: APBBaseView {
@@ -30,6 +31,7 @@ class SelectCourseView: APBBaseView {
         field.leftView = paddingView
         field.leftViewMode = .always
         field.placeholder = "Search courses"
+        field.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
         return field
     }()
 
@@ -77,5 +79,9 @@ class SelectCourseView: APBBaseView {
 
     @objc func addCourseTapped(sender: UIButton) {
         delegate?.addCourseTapped()
+    }
+
+    @objc func searchTextChanged(sender: UITextField) {
+        delegate?.searchTextChanged(text: sender.text)
     }
 }

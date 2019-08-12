@@ -22,10 +22,23 @@ class SelectCourseViewController: APBBaseViewController {
             return _rootView as? SelectCourseView
         }
     }
+
+    fileprivate func search(text: String) {
+        let courses = CourseRepository.course(context: managedObjectContext!, courseName: text)
+
+        print("search run")
+    }
 }
 
 extension SelectCourseViewController: SelectCourseViewDelegate {
     func addCourseTapped() {
-        navigationController?.pushViewController(AddCourseViewController(), animated: true)
+        navigationController?.pushViewController(AddCourseViewController(managedObjectContext: managedObjectContext), animated: true)
+    }
+
+    func searchTextChanged(text: String?) {
+        if let text = text,
+            !text.isEmpty {
+            search(text: text)
+        }
     }
 }
